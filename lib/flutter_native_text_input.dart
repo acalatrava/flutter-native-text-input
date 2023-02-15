@@ -353,7 +353,7 @@ class _NativeTextInputState extends State<NativeTextInput> {
             creationParams: _buildCreationParams(layout),
             onPlatformViewCreated: _createMethodChannel,
             hitTestBehavior: PlatformViewHitTestBehavior.opaque,
-            gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{
+            gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
               Factory<OneSequenceGestureRecognizer>(
                 () => EagerGestureRecognizer(),
               )
