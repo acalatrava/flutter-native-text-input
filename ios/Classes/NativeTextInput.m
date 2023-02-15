@@ -37,6 +37,7 @@
         _textView.textAlignment = [self textAlignmentFromString:args[@"textAlign"]];
         _textView.autocapitalizationType = [self textAutocapitalizationTypeFromString:args[@"textCapitalization"]];
         _textView.textContainer.lineBreakMode = NSLineBreakByCharWrapping;
+        _textView.scrollEnabled = false;
         
         if ([args[@"maxLines"] intValue] == 1) {
             _textView.textContainer.maximumNumberOfLines = 1;
