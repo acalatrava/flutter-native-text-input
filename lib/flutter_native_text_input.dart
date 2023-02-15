@@ -328,7 +328,7 @@ class _NativeTextInputState extends State<NativeTextInput> {
           viewType: NativeTextInput.viewType,
           surfaceFactory: (context, controller) => AndroidViewSurface(
             controller: controller as AndroidViewController,
-            hitTestBehavior: PlatformViewHitTestBehavior.translucent,
+            hitTestBehavior: PlatformViewHitTestBehavior.opaque,
             gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{},
           ),
           onCreatePlatformView: (PlatformViewCreationParams params) {
@@ -348,11 +348,16 @@ class _NativeTextInputState extends State<NativeTextInput> {
         );
       case TargetPlatform.iOS:
         return UiKitView(
-          viewType: NativeTextInput.viewType,
-          creationParamsCodec: const StandardMessageCodec(),
-          creationParams: _buildCreationParams(layout),
-          onPlatformViewCreated: _createMethodChannel,
-        );
+            viewType: NativeTextInput.viewType,
+            creationParamsCodec: const StandardMessageCodec(),
+            creationParams: _buildCreationParams(layout),
+            onPlatformViewCreated: _createMethodChannel,
+            hitTestBehavior: PlatformViewHitTestBehavior.opaque,
+            gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{
+              Factory<OneSequenceGestureRecognizer>(
+                () => EagerGestureRecognizer(),
+              )
+            });
       default:
         return CupertinoTextField(
           controller: widget.controller,
